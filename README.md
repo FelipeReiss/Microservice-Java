@@ -74,7 +74,8 @@
 - Commentar melhor classes mais insternas do código.
 
 ### Observações
-- Para realizar testes e me orientar durante o desenvolvimento eu criei um arquivo CSV com uma base de dados que imaginei que seria apropriada, creio que seja interessante ser avaliado junto com o resto do projeto. Arquivo se encontra na pasta [Provas_Senior/JAVA/cities_example_database.csv](Provas_Senior/JAVA/cities_example_database.csv)
+- Para realizar testes e me orientar durante o desenvolvimento eu criei um arquivo CSV com uma base de dados que imaginei que seria apropriada, creio que seja interessante ser avaliado junto com o resto do projeto. Arquivo se encontra em [Provas_Senior/JAVA/cities_example_database.csv](Provas_Senior/JAVA/cities_example_database.csv)
+- Houveram algumas SQL Queries necessárias que eu acredito que a melhor prática seria colocar chamadas de procedures na API, centralizando a manipulação do database com os DBAs, desta forma qualquer alteração eventual não afetaria a API. Porém como o intúito deste projeto foi havaliar meu conhecimento em JAVA e meu conhecimento em SQL está sendo havaliado no outro projeto, mantive o controle total no projeto. Apenas gostaria de deixar claro este ponto.
 - No item 12, referente a distância das cidades houve uma dificuldade da minha parte para interpretar o cálculo de logitudes e latitudes, logo, para facilitar o processo, utilizei classes próprias para este fim disponíveis na internet, priorizando a lógica de verificação das distância ao invéz do cáculo. Os devidos créditos foram deixados ao desenvolvedor responsável exatamente como o próprio documentou.
 
 # AVALIAÇÃO SQL
