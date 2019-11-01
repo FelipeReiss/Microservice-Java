@@ -61,6 +61,14 @@ public class CitiesController {
 		return services.getTotal();
 	}
 	
+	// Method to get total of cities at database
+	@RequestMapping(value = "/bigger-distance",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getCitiesMostDistant() {
+		return services.getCitiesMostDistant();
+	}
+	
 	// Method to get only Capitals (considering the database will have what is or not capital)
 	@RequestMapping(value = "/capitals",
 			method = RequestMethod.GET,

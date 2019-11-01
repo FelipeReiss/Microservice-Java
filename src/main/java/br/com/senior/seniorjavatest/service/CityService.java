@@ -16,6 +16,7 @@ import br.com.senior.seniorjavatest.exception.ResourceNotFoundException;
 import br.com.senior.seniorjavatest.exception.UnsupportedOperationException;
 import br.com.senior.seniorjavatest.model.City;
 import br.com.senior.seniorjavatest.repository.CityRepository;
+import br.com.senior.seniorjavatest.util.GeoCoordinate;
 
 @Service
 public class CityService {
@@ -139,9 +140,11 @@ public class CityService {
 				City city = new City();
 				city.setIdIbge(column[0]);
 				city.setCapital(Boolean.parseBoolean(column[1]));
-				city.setName(column[2]);
-				city.setPopulation(Long.parseLong(column[3]));
-				city.setState(column[4]);
+				city.setLatitude(Double.parseDouble(column[2]));
+				city.setLongitude(Double.parseDouble(column[3]));
+				city.setName(column[4]);
+				city.setPopulation(Long.parseLong(column[5]));
+				city.setState(column[6]);
 				
 				repository.save(city);
 			}
@@ -257,6 +260,47 @@ public class CityService {
 		}
 
 		return contentResponse;
+	}
+
+	public String getCitiesMostDistant() {
+		List<City> allCities = findAll();
+		if(allCities.isEmpty()) 
+			throw new ResourceNotFoundException("Sorry, we don't have baseline yet. Please, "
+					+ "try upload values at path /cities/upload");
+
+		JSONObject jsonResponse = new JSONObject();
+		List<String> biggerDistance = new ArrayList<String>();
+		int limitLoop = allCities.size() -1;
+		
+		for (int i = 0; i < limitLoop; i++) {
+			City firstCity = allCities.remove(0);
+			
+			for (City secondCity : allCities) {
+				
+				GeoCoordinate firstCityCoordinate = new GeoCoordinate(firstCity.getLatitude(), firstCity.getLongitude());
+				GeoCoordinate secondCityCoordinate = new GeoCoordinate(secondCity.getLatitude(), secondCity.getLongitude());
+				double distance = firstCityCoordinate.distanceInKm(secondCityCoordinate);
+				
+				if(biggerDistance.isEmpty()) {
+					biggerDistance.add(firstCity.getName());
+					biggerDistance.add(secondCity.getName());
+					biggerDistance.add(distance + "");
+				} else {
+					if(distance > Double.parseDouble(biggerDistance.get(2))) {
+						biggerDistance.clear();
+						biggerDistance.add(firstCity.getName());
+						biggerDistance.add(secondCity.getName());
+						biggerDistance.add(distance + "");
+					}
+				}
+			}
+		}
+		
+		jsonResponse.put("Distance_between", String.format("%1.2f km", Double.parseDouble(biggerDistance.get(2))));
+		jsonResponse.put("Second_city", biggerDistance.get(1));
+		jsonResponse.put("First_city", biggerDistance.get(0));
+		
+		return jsonResponse.toString();
 	}
 	
 }
