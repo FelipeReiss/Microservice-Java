@@ -11,7 +11,7 @@
 - Enviar arquivo para upload no database (**contempla item 1**)
 	* Método: POST
 	* Path: /cities/upload
-	* Parâmetro: CSV file
+	* Parâmetros: CSV file
 
 - Pegar as capitais (considerando que é uma informação existente no banco de dados, **contempla item 2**)
 	* Método: GET 
@@ -28,32 +28,32 @@
 - Pegar cidade baseada no código do IBGE(foram utilizados dados fictícios, **contempla item 5**)
 	* Método: GET 
 	* Path: /cities/ibge
-	* Parametros: in Path = /cities/ibge/{id_ibge}
+	* Parâmetros: in Path = /cities/ibge/{id_ibge}
 	
 - Pegar cidades específicas de um estado (**contempla item 6**)
 	* Método: GET 
 	* Path: /cities/states
-	* Parametros: in Path = /cities/states/{state_initials}
+	* Parâmetros: in Path = /cities/states/{state_initials}
 
 - Inserir nova cidade no database (**contempla item 7**)
 	* Método: POST 
 	* Path: /cities
-	* Parâmetro: JSON body item 
+	* Parâmetros: JSON body item 
 	
 - Deletar uma cidade (**contempla item 8**)
 	* Método: DELETE 
 	* Path: /cities
-	* Parâmetro: in Path = /cities/{id_to_delete}
+	* Parâmetros: in Path = /cities/{id_to_delete}
 
 - Pegar uma coluna qualquer do banco e filtrar por uma string (**contempla item 9**)
 	* Método: GET 
 	* Path: /cities
-	* Parametros: in argument "column" and "filter" = /cities?column={some_string}&filter={some_string}
+	* Parâmetros: in argument "column" and "filter" = /cities?column={some_string}&filter={some_string}
 
 - Pegar o número de geristros unicos de uma coluna qualquer(**contempla item 10**)
 	* Método: GET 
 	* Path: /cities
-	* Parametros: in argument "column" = /cities?column={some_string}
+	* Parâmetros: in argument "column" = /cities?column={some_string}
 
 - Pegar total de cidades no database (**contempla item 11**)
 	* Método: GET 
@@ -66,7 +66,7 @@
 - Atualizar cidade já existente (**item extra**)
 	* Método: PUT 
 	* Path: /cities
-	* Parâmetro: JSON body item 
+	* Parâmetros: JSON body item 
 
 ### Pontos de melhoria
 - Existem pontos de segurança a serem melhorados que eu gostaria de fazer com mais tempo hábil (utilização de HATEOAS)
