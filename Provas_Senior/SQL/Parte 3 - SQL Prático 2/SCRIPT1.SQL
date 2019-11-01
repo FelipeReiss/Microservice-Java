@@ -1,0 +1,54 @@
+/*
+Parte 3 – SQL Prático1
+Exercício 1.
+Crie as seguintes tabelas, em um script SQL com o nome de SCRIPT1.SQL:
+
+EXAME_NF
+IDNF	NUMERO
+NUMERO	NUMERO
+DATACADASTRO	DATA
+TOTALGERAL	NUMERO
+
+EXAME_ITEMNF
+IDITEMNF	NUMERO
+IDNF	NUMERO
+IDPRODUTO	NUMERO
+QTDE	NUMERO
+VALOR	NUMERO
+*/
+-- -----------------------------------------------------
+-- CREATING DB
+-- -----------------------------------------------------
+
+DROP DATABASE IF EXISTS Parte3ProvaSQL; -- OBS: LINHA ADICIONADA APENAS PARA MANTER A CONSISTÊNCIA DOS DADOS NESTE EXERCÍCIO, ENTENDO O RISCO DE SE DELETAR UM DB EM PRODUÇÃO
+CREATE DATABASE IF NOT EXISTS Parte3ProvaSQL;
+USE Parte3ProvaSQL;
+
+-- -----------------------------------------------------
+-- CREATING TABLE EXAME_NF
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS EXAME_NF (
+  IDNF INT NOT NULL AUTO_INCREMENT,
+  NUMERO INT NULL,
+  DATACADASTRO DATE NULL,
+  TOTALGERAL FLOAT NULL,
+  PRIMARY KEY (IDNF)
+);
+
+-- -----------------------------------------------------
+-- CREATING TABLE EXAME_ITEMNF
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS EXAME_ITEMNF (
+  IDITEMNF INT NOT NULL AUTO_INCREMENT,
+  IDPRODUTO INT NULL,
+  QTDE INT NULL,
+  VALOR FLOAT NULL,
+  IDNF INT NOT NULL,
+  PRIMARY KEY (IDITEMNF, IDNF),
+  INDEX fk_EXAME_ITEMNF_EXAME_NF1_idx (IDNF ASC),
+  CONSTRAINT fk_EXAME_ITEMNF_EXAME_NF1
+    FOREIGN KEY (IDNF)
+    REFERENCES EXAME_NF (IDNF)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
